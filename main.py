@@ -62,7 +62,7 @@ def main() -> None:
         print(f"Sending bundle targeting block {current_block + 1}")
         print(f"{replacement_uuid=}")
 
-        # Type hinting goes out the window afer this
+        # Type hinting goes out the window after this
 
         send_result = w3.flashbots.send_bundle(
             BUNDLE,
