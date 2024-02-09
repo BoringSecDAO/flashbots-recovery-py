@@ -4,7 +4,13 @@ from web3.types import TxParams
 import utils.abi as abi
 import utils.constants as constants
 
-w3: Web3 = Web3(HTTPProvider(constants.HTTP_PROVIDER_MAINNET))
+w3: Web3 = Web3(
+    HTTPProvider(
+        constants.HTTP_PROVIDER_MAINNET
+        if constants.CHAIN_ID == 1
+        else constants.HTTP_PROVIDER_GOERLI
+    )
+)
 
 """
     ! Build your bundle here 
