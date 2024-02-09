@@ -62,6 +62,18 @@ cd flashbots-recovery-py
 
 #### Clone this repo (HTTPS)
 
+1. At the top right of the repo on GitHub, click the green `Code` button, then under `HTTPS` click `Download ZIP`.
+2. Extract the downloaded archive to a folder like your Desktop using any ZIP tool (such as [WinRAR](https://www.win-rar.com/start.html?&L=0), [7Zip](https://www.7-zip.org/), or [NanaZip](https://github.com/M2Team/NanaZip)).
+3. Navigate to the extracted folder.
+
+<details>
+<summary>Download repo via HTTPS</summary>
+<br>
+
+![Download repo via HTTPS](./images/1-download-zip-via-https.jpg)
+
+</details>
+
 #### Install dependencies using Poetry
 
 ```bash
