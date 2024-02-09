@@ -1,6 +1,7 @@
 from os import getenv
 from typing import Final
 
+from web3 import Web3
 from eth_account.account import Account
 from eth_account.signers.local import LocalAccount
 
@@ -13,8 +14,8 @@ HTTP_FLASHBOTS_URI_MAINNET: Final[str] = "https://relay.flashbots.net"
 HTTP_FLASHBOTS_URI_GOERLI: Final[str] = "https://relay-goerli.flashbots.net"
 
 # Gas fees, denominated in Gwei
-MAX_FEE: Final[int] = 15
-MAX_TIP: Final[int] = 15
+MAX_FEE: Final[int] = Web3.toWei(15, "gwei")
+MAX_TIP: Final[int] = Web3.toWei(15, "gwei")
 
 # Account signers
 ETH_COMPROMISED_ACCOUNT_SIGNER: Final[LocalAccount] = Account.from_key(getenv("ETH_COMPROMISED_PRIVATE_KEY"))
