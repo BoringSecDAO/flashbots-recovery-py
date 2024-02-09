@@ -7,8 +7,6 @@ from pick import pick
 from web3 import HTTPProvider, Web3
 from web3.exceptions import TransactionNotFound
 
-from bundle.bundle import compromised_wallet_txs, gasser_wallet_txs
-
 
 def main() -> None:
     option, _ = pick(constants.PICK_MENU_OPTIONS, constants.PICK_MENU_TITLE)
@@ -90,5 +88,6 @@ def main() -> None:
 if __name__ == "__main__":
     load_dotenv()
     import utils.constants as constants
+    from bundle.bundle import compromised_wallet_txs, gasser_wallet_txs
 
     main()
