@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flashbots-recovery-py"
+version = "0.1.0"
+description = ""
+authors = ["Vile <111662603+vile@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+web3 = "<6.0.0"
+flashbots = "1.1.1"
+python-dotenv = "1.0.0"
+pick = "2.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
