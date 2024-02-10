@@ -35,7 +35,7 @@ gasser_wallet_txs: list[dict[TxParams]] = [
 compromised_wallet_txs: list[dict[TxParams]] = [
     # Transfer BAYC #1000
     {
-        "to": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
+        "to": w3.toChecksumAddress("0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"),
         "value": Web3.toWei(0, "ether"),
         "gas": 250_000,
         "maxFeePerGas": constants.MAX_FEE,

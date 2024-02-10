@@ -35,7 +35,7 @@ gasser_wallet_txs: list[dict[TxParams]] = [
 compromised_wallet_txs: list[dict[TxParams]] = [
     # Withdraw 1,000 APE tokens and unstake MAYC #1000 from ApeCoin Staking
     {
-        "to": "0x5954ab967bc958940b7eb73ee84797dc8a2afbb9",
+        "to": w3.toChecksumAddress("0x5954ab967bc958940b7eb73ee84797dc8a2afbb9"),
         "value": Web3.toWei(0, "ether"),
         "gas": 250_000,
         "maxFeePerGas": constants.MAX_FEE,
@@ -49,14 +49,14 @@ compromised_wallet_txs: list[dict[TxParams]] = [
     },
     # Transfer 1,000 APE token
     {
-        "to": "0xd9a442856c234a39a81a089c06451ebaa4306a72",
+        "to": w3.toChecksumAddress("0xd9a442856c234a39a81a089c06451ebaa4306a72"),
         "value": Web3.toWei(0, "ether"),
         "gas": 100_000,
         "maxFeePerGas": constants.MAX_FEE,
         "maxPriorityFeePerGas": constants.MAX_TIP,
         "nonce": w3.eth.get_transaction_count(
             constants.ETH_COMPROMISED_ACCOUNT_SIGNER.address
-        ) + 1,
+        )+ 1,  # fmt: skip
         "chainId": constants.CHAIN_ID,
         "data": ERC20_CONTRACT.encodeABI(
             "transfer",

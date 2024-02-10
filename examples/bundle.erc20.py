@@ -35,7 +35,7 @@ gasser_wallet_txs: list[dict[TxParams]] = [
 compromised_wallet_txs: list[dict[TxParams]] = [
     # Transfer 1,000 APE token
     {
-        "to": "0xd9a442856c234a39a81a089c06451ebaa4306a72",
+        "to": w3.toChecksumAddress("0xd9a442856c234a39a81a089c06451ebaa4306a72"),
         "value": Web3.toWei(0, "ether"),
         "gas": 100_000,
         "maxFeePerGas": constants.MAX_FEE,
