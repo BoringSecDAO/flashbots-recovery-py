@@ -93,4 +93,51 @@ poetry run py main.py
 
 ## Creating a Bundle
 
-Coming soon
+In most cases, two seperate wallets are required to complete a rescue: a wallet that provides ETH for gas fees (the "gasser" wallet), and the wallet in which assets are being recovered from (the "compromised" wallet).
+Providing ETH from a secondary wallet in the same bundle elimates issues with [sweeper bots](https://support.metamask.io/hc/en-us/articles/5716855323675-Fighting-back-against-sweeper-bots).
+
+A transaction bundle is atomic, meaning the bundle will only be mined if all the transactions within the bundle will execute successfully in the same block.
+
+### Providing gas
+
+A simple and generic ETH transfer transaction already exists in [bundle.py](./bundle/bundle.py).
+Most of the time, you will only need to change the `value` (amount) of ETH sent (default: `0.01` ETH).
+However, if there is a case where the gasser wallet needs to execute multiple transaction before the compromised wallet, it is extensible.
+
+### Rescueing assets
+
+Transactions in `compromised_wallet_txs` completely depend on what interactions are required to rescue assets.
+Generic (partial) ABIs are provided for all major ERCs (ERC721, ERC1155, and ERC20), along with a generic batch [transfer contract](https://etherscan.io/address/0xf5028d67221f8d7e09dD53e5F9Aa09a194e33A6f#code).
+In the case where transactions interact with non-ERC-conforming tokens or custom contracts, you can either put your own ABI in [utils.abi](./utils/abi.py), or manually construct the calldata and include it in the `data` field of the tx.
+
+#### Incrementing nonce
+
+As each entry in `compromised_wallet_txs` is executed seperately, every new transaction needs to have a properly incremented nonce attached to it. 
+
+<details>
+<summary>Incrementing Nonce Between Transactions</summary>
+
+```python
+   # transaction 1
+   {
+      ...
+      "nonce": w3.eth.get_transaction_count(
+            constants.ETH_COMPROMISED_ACCOUNT_SIGNER.address
+        ),
+      ...
+   },
+   # transaction 2
+   {
+      ...
+      "nonce": w3.eth.get_transaction_count(
+            constants.ETH_COMPROMISED_ACCOUNT_SIGNER.address
+        ) + 1,
+      ...
+   }
+```
+
+</details>
+
+### Examples
+
+Examples are viewable under the [examples folder](./examples/).
