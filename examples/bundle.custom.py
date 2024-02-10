@@ -56,7 +56,7 @@ compromised_wallet_txs: list[dict[TxParams]] = [
         "maxPriorityFeePerGas": constants.MAX_TIP,
         "nonce": w3.eth.get_transaction_count(
             constants.ETH_COMPROMISED_ACCOUNT_SIGNER.address
-        ),
+        ) + 1,
         "chainId": constants.CHAIN_ID,
         "data": ERC20_CONTRACT.encodeABI(
             "transfer",
