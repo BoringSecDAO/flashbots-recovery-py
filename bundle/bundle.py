@@ -27,7 +27,7 @@ w3: Web3 = Web3(
 """
 
 # We only need a single tx from the gas wallet
-gasser_wallet_txs: list[dict[TxParams]] = [
+gasser_wallet_txs: list[TxParams] = [
     {
         "to": constants.ETH_COMPROMISED_ACCOUNT_SIGNER.address,
         "value": Web3.toWei(0.01, "ether"),
@@ -43,6 +43,6 @@ gasser_wallet_txs: list[dict[TxParams]] = [
     },
 ]
 
-compromised_wallet_txs: list[dict[TxParams]] = [
+compromised_wallet_txs: list[TxParams] = [
     {},
 ]
