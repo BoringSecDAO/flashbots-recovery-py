@@ -2,11 +2,11 @@ from typing import Final
 from uuid import UUID, uuid4
 
 from dotenv import load_dotenv
-from flashbots import flashbot
 from flashbots.types import FlashbotsBundleTx, HexStr
 from pick import pick
 from web3 import HTTPProvider, Web3
 from web3.exceptions import TransactionNotFound
+from web3morebundlers import bundler
 
 
 def main() -> None:
@@ -18,6 +18,19 @@ def main() -> None:
             print("Please edit the .env file to include the proper private keys and addresses")  # fmt: skip
             exit()
 
+    BUNDLER_ENPOINTS: Final[list[str]] = [
+        "https://relay.flashbots.net",
+        "https://rpc.titanbuilder.xyz",
+        "https://builder0x69.io",
+        "https://rpc.beaverbuild.org",
+        "https://rsync-builder.xyz",
+        "https://eth-builder.com",
+        "https://builder.gmbit.co/rpc",
+        "https://buildai.net",
+        "https://rpc.payload.de",
+        "https://rpc.nfactorial.xyz",
+    ]
+
     # Create Web3 provider and inject flashbots module
     w3: Web3 = Web3(
         HTTPProvider(
@@ -26,10 +39,12 @@ def main() -> None:
             else constants.HTTP_PROVIDER_GOERLI
         )
     )
-    flashbot(
-        w3,
-        constants.ETH_BUNDLE_SUBMITTER,
-        (
+
+    bundler(
+        w3=w3,
+        signature_account=constants.ETH_BUNDLE_SUBMITTER,
+        endpoint_uris=BUNDLER_ENPOINTS,
+        flashbots_uri=(
             constants.HTTP_FLASHBOTS_URI_MAINNET
             if constants.CHAIN_ID == 1
             else constants.HTTP_FLASHBOTS_URI_GOERLI
